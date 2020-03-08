@@ -1,0 +1,9 @@
+/* Element Variables */
+
+// Override Element UI variables
+
+// Icon font path, required
+$--font-path: "~element-ui/lib/theme-chalk/fonts";
+
+// Apply overrided variables in Element UI
+@import "~element-ui/packages/theme-chalk/src/index";

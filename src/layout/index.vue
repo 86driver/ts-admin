@@ -35,20 +35,20 @@ export default class App extends Vue {}
     bottom: 0;
     left: 0;
     overflow: hidden;
-    width: $sidebarWidth;
+    width: $sideBarWidth;
     background: red;
   }
   .main-content {
     background: yellow;
     min-height: 100%;
-    margin-left: $sidebarWidth;
+    margin-left: $sideBarWidth;
     position: relative;
 
     .navbar-container {
       position: fixed;
       top: 0;
       right: 0;
-      width: calc(100% - #{$sidebarWidth});
+      width: calc(100% - #{$sideBarWidth});
       background: blue;
       height: $navbarHeight;
     }

@@ -1,3 +1,40 @@
-// layout variables
-$sidebarWidth: 240px;
+/* Variables */
+
+// Base color
+$blue: #324157;
+$light-blue: #3a71a8;
+$red: #ff4949;
+$pink: #e65d6e;
+$green: #30b08f;
+$tiffany: #4ab7bd;
+$yellow: #faad14;
+$panGreen: #30b08f;
+$bd-color: #eef0f2;
+
+// Sidebar
+$sideBarWidth: 250px;
 $navbarHeight: 60px;
+$subMenuBg: #fff;
+$subMenuHover: #c5e5f6;
+$subMenuActiveText: #868686;
+$menuBg: #fff;
+$menuText: #303133;
+$menuActiveText: #1890ff; // Also see settings.sidebarTextTheme
+$main-color: #1890ff;
+
+// Login page
+$lightGray: #eee;
+$darkGray: #889aa4;
+$loginBg: #2d3a4b;
+$loginCursorColor: #fff;
+
+// title
+$title-color: #868686;
+$word: #333333;
+// The :export directive is the magic sauce for webpack
+// https://mattferderer.com/use-sass-variables-in-typescript-and-javascript
+:export {
+  menuBg: $menuBg;
+  menuText: $menuText;
+  menuActiveText: $menuActiveText;
+}

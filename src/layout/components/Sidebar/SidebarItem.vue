@@ -38,7 +38,7 @@
 <script lang="ts">
 import path from 'path'
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { Route, RouteConfig } from 'vue-router'
+import { RouteConfig } from 'vue-router'
 import SidebarItemLink from './SidebarItemLink.vue'
 
 @Component({

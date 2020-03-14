@@ -15,7 +15,9 @@ module.exports = {
     'lines-between-class-members': 0,
     'space-before-function-paren': 0,
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    '@typescript-eslint/no-explicit-any': 0,
+    'prefer-const': 0
   },
   overrides: [
     {

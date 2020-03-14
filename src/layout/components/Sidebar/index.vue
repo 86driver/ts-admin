@@ -48,10 +48,9 @@ export default class extends Vue {
   }
 
   get routes() {
-    let secondRoutes: RouteConfig[] = (this.$router as any).options.routes
-    console.log(this.$router.options.routes)
+    const secondRoutes: RouteConfig[] = (this.$router as any).options.routes
     // 生成只有二级的路由表
-    let tempRoutes: RouteConfig[] = JSON.parse(JSON.stringify(secondRoutes))
+    const tempRoutes: RouteConfig[] = JSON.parse(JSON.stringify(secondRoutes))
     tempRoutes.forEach(item => {
       if (item.children) {
         item.children.forEach(item1 => {
@@ -72,7 +71,7 @@ export default class extends Vue {
     const route = this.$route
     const { meta, path } = route
     let activePathList = path.split('/')
-    let activePath: string = ''
+    let activePath = ''
     if (activePathList.length > 2) {
       activePath = `/${activePathList[1]}/${activePathList[2]}`
     } else {

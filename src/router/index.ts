@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Layout from '@/layout/index.vue'
 
 import filesRouter from './modules/files/files'
 
@@ -10,12 +9,12 @@ const routes = [
   {
     path: '/',
     name: 'Layout',
-    component: Layout,
+    component: () => import('@/layout/index.vue'),
     children: [
       {
         path: 'home',
         name: 'Home',
-        component: Layout,
+        component: () => import('@/views/home.vue'),
         meta: {
           breadcrumb: true,
           title: '首页',

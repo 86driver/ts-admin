@@ -1,11 +1,22 @@
 <template>
-  <div class="home"></div>
+  <div>1111</div>
 </template>
 
-<script>
-export default {
-  name: 'Home'
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+
+import { getPageRouter } from '@/api/page-router/page-router.ts'
+
+@Component({})
+export default class App extends Vue {
+  async created() {
+    this._getPageRouter()
+  }
+
+  async _getPageRouter() {
+    await getPageRouter()
+  }
 }
 </script>
 
-vue
+<style lang="scss" scoped></style>

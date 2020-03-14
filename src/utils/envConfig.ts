@@ -3,11 +3,10 @@
  */
 
 let buildEnv = process.env.VUE_APP_ENV || ''
-
 const K_V_MAP = new Map<string, string>([
-  ['development', 'http://192.168.199.150:8081'],
-  ['test', 'http://192.168.199.150:8081'],
-  ['production', 'http://192.168.199.150:8081']
+  ['development', 'http://localhost:3000'],
+  ['test', 'http://localhost:3000'],
+  ['production', 'http://localhost:3000']
 ])
 
 export default K_V_MAP.get(buildEnv)

@@ -1,5 +1,5 @@
 <template>
-  <div>第三代的</div>
+  <router-view />
 </template>
 
 <script lang="ts">

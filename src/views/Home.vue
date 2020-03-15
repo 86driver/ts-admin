@@ -14,7 +14,7 @@ export default class App extends Vue {
   }
 
   async _getPageRouter() {
-    await getPageRouter()
+    await getPageRouter({ type: 'admin' })
   }
 }
 </script>

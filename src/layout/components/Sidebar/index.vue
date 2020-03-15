@@ -27,8 +27,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
-import { AppModule } from '@/store/modules/app'
+import { Component, Vue } from 'vue-property-decorator'
 import SidebarItem from './SidebarItem.vue'
 import SidebarLogo from './SidebarLogo.vue'
 import variables from '@/styles/_variables.scss'
@@ -44,7 +43,10 @@ import { omit } from '../../../utils/tool'
 })
 export default class extends Vue {
   get sidebar() {
-    return AppModule.sidebar
+    return {
+      opened: true,
+      withoutAnimation: false
+    }
   }
 
   get routes() {
@@ -69,7 +71,7 @@ export default class extends Vue {
   // 高亮侧栏
   get activeMenu() {
     const route = this.$route
-    const { meta, path } = route
+    const { path } = route
     let activePathList = path.split('/')
     let activePath = ''
     if (activePathList.length > 2) {

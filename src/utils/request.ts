@@ -20,7 +20,7 @@ server.interceptors.request.use(
 
 server.interceptors.response.use(
   response => {
-    return response
+    return response.data
   },
   err => {
     return Promise.reject(err)

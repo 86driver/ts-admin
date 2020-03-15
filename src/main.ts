@@ -6,7 +6,7 @@ import store from './store'
 import 'normalize.css'
 import ElementUI from 'element-ui'
 import '@/styles/element-variables.scss'
-
+import './permission'
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false

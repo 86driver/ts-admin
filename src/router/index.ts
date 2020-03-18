@@ -6,7 +6,6 @@ import pushRouter from './modules/push'
 import userCenterRouter from './modules/user-center'
 
 Vue.use(Router)
-
 export const constantRoutes = [
   {
     path: '/',
@@ -43,8 +42,7 @@ export const constantRoutes = [
 export const asyncRoutes = [
   ...permissionRouter,
   ...pushRouter,
-  ...userCenterRouter,
-  { path: '*', redirect: '/404', hidden: true }
+  ...userCenterRouter
 ]
 
 const createRouter = () =>

@@ -3,28 +3,22 @@ import { Route } from 'vue-router'
 import { UserModule } from '@/store/modules/userInfo'
 import { asyncRoutes, constantRoutes } from '@/router'
 
-// 防止页面刷新数据丢失
-let userInfo = localStorage.getItem('userInfo')
-if (userInfo) {
-  userInfo = JSON.parse(userInfo)
-  UserModule.SET_USER_INFO(userInfo)
-}
-
-// route2: api获取， router1：本地已存储
-const formatAsyncRoutes = (apiRoutes, asyncRoutes) => {
-  let res: any = []
+const formatAsyncRoutes = (
+  apiRoutes: ApiRoute[],
+  asyncRoutes: LocalRoute[]
+) => {
+  let res: LocalRoute[] = []
   apiRoutes.map(item1 => {
     asyncRoutes.map(item2 => {
       if (item1.path === item2.path) {
         let temp = item2
-        if (item1.children) {
+        if (item1.children && item2.children) {
           temp.children = formatAsyncRoutes(item1.children, item2.children)
         }
         res.push(temp)
       }
     })
   })
-  res = constantRoutes.concat(res)
   return res
 }
 
@@ -32,20 +26,30 @@ router.beforeEach(async (to: Route, from: Route, next: any) => {
   if (to.path === '/login') {
     next()
   } else {
-    const hasRoute = UserModule.userInfo.dataList.length
+    const hasRoute = UserModule.userInfo.userRoutes.length
     if (hasRoute) {
+      next()
+    } else {
       try {
-        // const accessRoutes = formatAsyncRoutes(
-        //   UserModule.userInfo.dataList,
-        //   asyncRoutes
-        // )
-        // router.addRoutes(accessRoutes)
-        next()
+        // 防止页面刷新数据丢失
+        let userInfo = localStorage.getItem('userInfo')
+        if (userInfo) {
+          let formatUserInfo: LoginUserInfo = {
+            userType: JSON.parse(userInfo).userType,
+            userRoutes: JSON.parse(userInfo).dataList
+          }
+          UserModule.SET_USER_INFO(formatUserInfo)
+        }
+        const accessRoutes = formatAsyncRoutes(
+          <ApiRoute[]>UserModule.userInfo.userRoutes,
+          asyncRoutes
+        )
+        accessRoutes.push({ path: '*', redirect: '/404', hidden: true })
+        router.addRoutes(accessRoutes)
+        next({ ...to, replace: true })
       } catch {
         next('/login')
       }
-    } else {
-      next('/login')
     }
   }
 })

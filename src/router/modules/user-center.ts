@@ -4,7 +4,7 @@ const userCenterRouter = [
   {
     path: '/user-center',
     name: 'UserCenter',
-    components: Layout,
+    component: Layout,
     redirect: '/user-center/my-fans',
     meta: {
       title: '个人中心',
@@ -15,7 +15,7 @@ const userCenterRouter = [
       {
         path: 'my-fans',
         name: 'MyFans',
-        components: import('@/views/user-center/my-fans.vue'),
+        component: () => import('@/views/user-center/my-fans.vue'),
         meta: {
           title: '我的粉丝',
           icon: 'menu-home',
@@ -23,9 +23,9 @@ const userCenterRouter = [
         }
       },
       {
-        path: 'my-fans',
-        name: 'MyFans',
-        components: import('@/views/user-center/my-focus.vue'),
+        path: 'my-focus',
+        name: 'MyFocus',
+        component: () => import('@/views/user-center/my-focus.vue'),
         meta: {
           title: '我的关注',
           icon: 'menu-home',

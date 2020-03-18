@@ -51,6 +51,7 @@ export default class App extends Vue {}
       width: calc(100% - #{$sideBarWidth});
       background: blue;
       height: $navbarHeight;
+      color: #fff;
     }
 
     .app-main {

@@ -4,7 +4,7 @@ const permissionRouter = [
   {
     path: '/permission',
     name: 'Permission',
-    components: Layout,
+    component: Layout,
     redirect: '/permission/role',
     meta: {
       title: '权限管理',
@@ -15,7 +15,7 @@ const permissionRouter = [
       {
         path: 'role',
         name: 'Role',
-        components: import('@/views/permission/role.vue'),
+        component: () => import('@/views/permission/role.vue'),
         meta: {
           title: '角色权限',
           icon: 'menu-home',
@@ -25,7 +25,7 @@ const permissionRouter = [
       {
         path: 'page',
         name: 'Page',
-        components: import('@/views/permission/page.vue'),
+        component: () => import('@/views/permission/page.vue'),
         meta: {
           title: '页面权限',
           icon: 'menu-home',

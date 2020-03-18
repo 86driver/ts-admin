@@ -16,27 +16,16 @@ import { Component, Vue } from 'vue-property-decorator'
 
 import { UserModule } from '@/store/modules/userInfo'
 
-import { getPageRouter } from '@/api/page-router/page-router.ts'
-
 @Component({
   name: 'Login'
 })
 export default class extends Vue {
   private userType = ''
 
-  private async handleLogin() {
-    let res: any
-    res = await getPageRouter({ type: this.userType })
-    if (res.status.code === 0) {
-      localStorage.setItem('userInfo', JSON.stringify(res.data))
-      UserModule.SET_USER_INFO(res.data)
-      this.$router.push('home')
-    } else {
-      this.$message({
-        type: 'warning',
-        message: res.status.message
-      })
-    }
+  private handleLogin() {
+    UserModule.Login(this.userType).then(() => {
+      this.$router.push('/home')
+    })
   }
 }
 </script>

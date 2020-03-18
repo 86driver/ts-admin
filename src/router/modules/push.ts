@@ -4,7 +4,7 @@ const pushRouter = [
   {
     path: '/push',
     name: 'Push',
-    components: Layout,
+    component: Layout,
     redirect: '/push/banner',
     meta: {
       title: '推送中心',
@@ -15,7 +15,7 @@ const pushRouter = [
       {
         path: 'banner',
         name: 'Banner',
-        components: import('@/views/push/banner.vue'),
+        component: () => import('@/views/push/banner.vue'),
         meta: {
           title: '轮播图推送',
           icon: 'menu-home',

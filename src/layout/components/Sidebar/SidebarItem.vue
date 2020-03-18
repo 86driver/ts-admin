@@ -8,26 +8,27 @@
     ]"
   >
     <template v-if="theOnlyOneChild && !theOnlyOneChild.children">
-      <sidebar-item-link
-        v-if="theOnlyOneChild.meta"
-        :to="resolvePath(theOnlyOneChild.path)"
-      >
+      <sidebar-item-link v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
         <el-menu-item
           :index="resolvePath(theOnlyOneChild.path)"
           :class="{ 'submenu-title-noDropdown': isFirstLevel }"
         >
-          <span v-if="theOnlyOneChild.meta.title" slot="title">{{
+          <span v-if="theOnlyOneChild.meta.title" slot="title">
+            {{
             theOnlyOneChild.meta.title
-          }}</span>
+            }}
+          </span>
         </el-menu-item>
       </sidebar-item-link>
     </template>
     <el-submenu v-else :index="resolvePath(item.path)" popper-append-to-body>
       <!-- 侧栏 title -->
       <template slot="title">
-        <span v-if="item.meta && item.meta.title" slot="title">{{
+        <span v-if="item.meta && item.meta.title" slot="title">
+          {{
           item.meta.title
-        }}</span>
+          }}
+        </span>
       </template>
       <template v-if="item.children">
         <sidebar-item

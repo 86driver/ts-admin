@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
+
 import router from './router'
 import store from './store'
-
 import 'normalize.css'
 import ElementUI from 'element-ui'
 import '@/styles/element-variables.scss'

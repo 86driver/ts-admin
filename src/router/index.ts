@@ -11,6 +11,10 @@ export const constantRoutes = [
     path: '/',
     name: 'Layout',
     component: () => import('@/layout/index.vue'),
+    meta: {
+      hidden: false,
+      title: 'static'
+    },
     redirect: '/home',
     children: [
       {
@@ -18,9 +22,8 @@ export const constantRoutes = [
         name: 'Home',
         component: () => import('@/views/home.vue'),
         meta: {
-          breadcrumb: true,
           title: '首页',
-          icon: 'menu-home'
+          hidden: false
         }
       }
     ]

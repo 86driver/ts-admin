@@ -1,44 +1,23 @@
 <template>
-  <div
-    v-if="!item.meta || !item.meta.hidden"
-    :class="[
-      'menu-wrapper',
-      isCollapse ? 'simple-mode' : 'full-mode',
-      { 'first-level': isFirstLevel }
-    ]"
-  >
-    <template v-if="theOnlyOneChild && !theOnlyOneChild.children">
-      <sidebar-item-link v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
-        <el-menu-item
-          :index="resolvePath(theOnlyOneChild.path)"
-          :class="{ 'submenu-title-noDropdown': isFirstLevel }"
-        >
-          <span v-if="theOnlyOneChild.meta.title" slot="title">
-            {{
-            theOnlyOneChild.meta.title
-            }}
-          </span>
+  <div v-if="!item.meta.hidden">
+    <template v-if="!item.children ">
+      <sidebar-item-link :to="resolvePath(item.path)">
+        <el-menu-item :index="resolvePath(item.path)">
+          <span>{{item.meta.title}}</span>
         </el-menu-item>
       </sidebar-item-link>
     </template>
     <el-submenu v-else :index="resolvePath(item.path)" popper-append-to-body>
       <!-- 侧栏 title -->
       <template slot="title">
-        <span v-if="item.meta && item.meta.title" slot="title">
-          {{
-          item.meta.title
-          }}
-        </span>
+        <span>{{item.meta.title}}</span>
       </template>
       <template v-if="item.children">
         <sidebar-item
           v-for="child in item.children"
           :key="child.path"
           :item="child"
-          :is-collapse="isCollapse"
-          :is-first-level="false"
-          :base-path="resolvePath(child.path)"
-          class="nest-menu"
+          :base-path="resolvePath(item.path)"
         />
       </template>
     </el-submenu>
@@ -52,8 +31,6 @@ import { RouteConfig } from 'vue-router'
 import SidebarItemLink from './SidebarItemLink.vue'
 
 @Component({
-  // Set 'name' here to prevent uglifyjs from causing recursive component not work
-  // See https://medium.com/haiiro-io/element-component-name-with-vue-class-component-f3b435656561 for detail
   name: 'SidebarItem',
   components: {
     SidebarItemLink
@@ -61,39 +38,7 @@ import SidebarItemLink from './SidebarItemLink.vue'
 })
 export default class extends Vue {
   @Prop({ required: true }) private item!: RouteConfig
-  @Prop({ default: false }) private isCollapse!: boolean
-  @Prop({ default: true }) private isFirstLevel!: boolean
   @Prop({ default: '' }) private basePath!: string
-
-  get showingChildNumber() {
-    if (this.item.children) {
-      const showingChildren = this.item.children.filter(item => {
-        if (item.meta && item.meta.hidden) {
-          return false
-        } else {
-          return true
-        }
-      })
-      return showingChildren.length
-    }
-    return 0
-  }
-
-  get theOnlyOneChild() {
-    if (this.showingChildNumber > 1) {
-      return null
-    }
-    if (this.item.children) {
-      for (let child of this.item.children) {
-        if (!child.meta || !child.meta.hidden) {
-          return child
-        }
-      }
-    }
-    // If there is no children, return itself with path removed,
-    // because this.basePath already conatins item's path information
-    return { ...this.item, path: '' }
-  }
 
   private resolvePath(routePath: string) {
     return path.resolve(this.basePath, routePath)
@@ -102,50 +47,6 @@ export default class extends Vue {
 </script>
 
 <style lang="scss">
-.el-submenu.is-active > .el-submenu__title {
-  color: $subMenuActiveText !important;
-}
-
-.full-mode {
-  .nest-menu .el-submenu > .el-submenu__title,
-  .el-submenu .el-menu-item {
-    min-width: $sideBarWidth !important;
-    background-color: $subMenuBg !important;
-
-    &:hover {
-      background-color: $subMenuHover !important;
-    }
-  }
-}
-
-.simple-mode {
-  &.first-level {
-    .submenu-title-noDropdown {
-      padding: 0 !important;
-      position: relative;
-
-      .el-tooltip {
-        padding: 0 !important;
-      }
-    }
-
-    .el-submenu {
-      overflow: hidden;
-
-      & > .el-submenu__title {
-        padding: 0px !important;
-
-        .el-submenu__icon-arrow {
-          display: none;
-        }
-
-        & > span {
-          visibility: hidden;
-        }
-      }
-    }
-  }
-}
 </style>
 
 <style lang="scss" scoped></style>

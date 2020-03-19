@@ -8,7 +8,6 @@ const userCenterRouter = [
     redirect: '/user-center/my-fans',
     meta: {
       title: '个人中心',
-      icon: 'menu-home',
       hidden: false
     },
     children: [
@@ -18,7 +17,6 @@ const userCenterRouter = [
         component: () => import('@/views/user-center/my-fans.vue'),
         meta: {
           title: '我的粉丝',
-          icon: 'menu-home',
           hidden: false
         }
       },
@@ -28,7 +26,6 @@ const userCenterRouter = [
         component: () => import('@/views/user-center/my-focus.vue'),
         meta: {
           title: '我的关注',
-          icon: 'menu-home',
           hidden: false
         }
       }

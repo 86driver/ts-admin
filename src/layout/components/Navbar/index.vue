@@ -21,6 +21,5 @@ export default class App extends Vue {
 .navbar {
   text-align: right;
   line-height: 60px;
-  padding-right: 10px;
 }
 </style>

@@ -12,8 +12,7 @@ declare interface LocalRoute extends UserRoute {
   component?: any
   redirect: string
   meta?: {
-    title: string
-    icon: string
+    title?: string
     hidden: boolean
   }
   children?: any[]

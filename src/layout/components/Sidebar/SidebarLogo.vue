@@ -1,47 +1,24 @@
 <template>
-  <div class="sidebar-logo-container" :class="{ collapse: collapse }">
-    <transition name="sidebarLogoFade">
-      <router-link
-        v-if="collapse"
-        key="collapse"
-        class="sidebar-logo-link"
-        to="/"
-      >
-        <img src="@/assets/images/favicon.png" class="sidebar-logo" />
-      </router-link>
-      <router-link v-else key="expand" class="sidebar-logo-link" to="/">
-        <img src="@/assets/images/favicon.png" class="sidebar-logo" />
-        <h1 class="sidebar-title">
-          {{ title }}
-        </h1>
-      </router-link>
-    </transition>
+  <div class="sidebar-logo-container">
+    <router-link class="sidebar-logo-link" to="/">
+      <i class="sidebar-logo el-icon-s-management"></i>
+      <h1 class="sidebar-title">{{ title }}</h1>
+    </router-link>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
   name: 'SidebarLogo'
 })
 export default class extends Vue {
-  @Prop({ required: true }) private collapse!: boolean
-
-  private title = '兔兔后台管理中心'
+  private title = '动态路由权限管理'
 }
 </script>
 
 <style lang="scss" scoped>
-.sidebarLogoFade-enter-active {
-  transition: opacity 1.5s;
-}
-
-.sidebarLogoFade-enter,
-.sidebarLogoFade-leave-to {
-  opacity: 0;
-}
-
 .sidebar-logo-container {
   position: relative;
   width: 100%;
@@ -56,29 +33,16 @@ export default class extends Vue {
     width: 100%;
 
     & .sidebar-logo {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      vertical-align: middle;
-      margin-right: 14px;
+      margin-right: 5px;
     }
 
     & .sidebar-title {
       display: inline-block;
       margin: 0;
-      color: #314569;
       font-weight: 600;
-      line-height: 50px;
       font-size: 16px;
       letter-spacing: 2px;
-      font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
       vertical-align: middle;
-    }
-  }
-
-  &.collapse {
-    .sidebar-logo {
-      margin-right: 0px;
     }
   }
 }

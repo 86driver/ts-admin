@@ -25,7 +25,6 @@ export default class App extends Vue {}
 
 <style lang="scss" scoped>
 .layout-container {
-  @include clearfix;
   width: 100%;
   height: 100%;
   position: relative;
@@ -36,7 +35,6 @@ export default class App extends Vue {}
     left: 0;
     overflow: hidden;
     width: $sideBarWidth;
-    background: red;
   }
   .main-content {
     background: yellow;

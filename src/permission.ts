@@ -1,7 +1,7 @@
 import router from './router'
 import { Route } from 'vue-router'
 import { UserModule } from '@/store/modules/userInfo'
-import { asyncRoutes } from '@/router'
+import { asyncRoutes, constantRoutes } from '@/router'
 
 // 动态路由匹配（根据业务逻辑而定）
 const formatAsyncRoutes = (
@@ -25,8 +25,10 @@ const formatAsyncRoutes = (
 
 const setAsyncRoutes = (apiRoutes: ApiRoute[], asyncRoutes: LocalRoute[]) => {
   const accessRoutes = formatAsyncRoutes(apiRoutes, asyncRoutes)
-  accessRoutes.push({ path: '*', redirect: '/404', hidden: true })
+  accessRoutes.push({ path: '*', redirect: '/404', meta: { hidden: true } })
   router.addRoutes(accessRoutes)
+  // 手动添加动态路由（侧边栏使用）
+  router.options.routes = constantRoutes.concat(<any[]>accessRoutes)
 }
 
 // 在路由上挂载添加动态路由的方法

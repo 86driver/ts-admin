@@ -1,7 +1,5 @@
 <template>
-  <router-link
-    :to="to"
-  >
+  <router-link :to="to">
     <slot />
   </router-link>
 </template>
@@ -16,3 +14,9 @@ export default class extends Vue {
   @Prop({ required: true }) private to!: string
 }
 </script>
+
+<style lang="scss" scoped>
+a {
+  text-decoration: none;
+}
+</style>

@@ -1,0 +1,43 @@
+[33mcommit 70cf08674c38c4290748966a53029f6c05e58256[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: yanbiao <biao.yan@office.feng.com>
+Date:   Thu Mar 19 09:54:23 2020 +0800
+
+    权限逻辑修改
+
+[1mdiff --git a/src/permission.ts b/src/permission.ts[m
+[1mindex e6c275d..1b017d8 100644[m
+[1m--- a/src/permission.ts[m
+[1m+++ b/src/permission.ts[m
+[36m@@ -30,16 +30,14 @@[m [mrouter.beforeEach(async (to: Route, from: Route, next: any) => {[m
+     if (hasRoute) {[m
+       next()[m
+     } else {[m
+[31m-      try {[m
+[31m-        // 防止页面刷新数据丢失[m
+[31m-        let userInfo = localStorage.getItem('userInfo')[m
+[31m-        if (userInfo) {[m
+[31m-          let formatUserInfo: LoginUserInfo = {[m
+[31m-            userType: JSON.parse(userInfo).userType,[m
+[31m-            userRoutes: JSON.parse(userInfo).dataList[m
+[31m-          }[m
+[31m-          UserModule.SET_USER_INFO(formatUserInfo)[m
+[32m+[m[32m      // 防止页面刷新数据丢失[m
+[32m+[m[32m      let userInfo = localStorage.getItem('userInfo')[m
+[32m+[m[32m      if (userInfo) {[m
+[32m+[m[32m        let formatUserInfo: LoginUserInfo = {[m
+[32m+[m[32m          userType: JSON.parse(userInfo).userType,[m
+[32m+[m[32m          userRoutes: JSON.parse(userInfo).dataList[m
+         }[m
+[32m+[m[32m        UserModule.SET_USER_INFO(formatUserInfo)[m
+         const accessRoutes = formatAsyncRoutes([m
+           <ApiRoute[]>UserModule.userInfo.userRoutes,[m
+           asyncRoutes[m
+[36m@@ -47,7 +45,7 @@[m [mrouter.beforeEach(async (to: Route, from: Route, next: any) => {[m
+         accessRoutes.push({ path: '*', redirect: '/404', hidden: true })[m
+         router.addRoutes(accessRoutes)[m
+         next({ ...to, replace: true })[m
+[31m-      } catch {[m
+[32m+[m[32m      } else {[m
+         next('/login')[m
+       }[m
+     }[m

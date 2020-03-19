@@ -1,7 +1,7 @@
 import router from './router'
 import { Route } from 'vue-router'
 import { UserModule } from '@/store/modules/userInfo'
-import { asyncRoutes, constantRoutes } from '@/router'
+import { asyncRoutes } from '@/router'
 
 const formatAsyncRoutes = (
   apiRoutes: ApiRoute[],

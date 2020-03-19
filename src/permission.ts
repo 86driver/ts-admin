@@ -30,16 +30,14 @@ router.beforeEach(async (to: Route, from: Route, next: any) => {
     if (hasRoute) {
       next()
     } else {
-      try {
-        // 防止页面刷新数据丢失
-        let userInfo = localStorage.getItem('userInfo')
-        if (userInfo) {
-          let formatUserInfo: LoginUserInfo = {
-            userType: JSON.parse(userInfo).userType,
-            userRoutes: JSON.parse(userInfo).dataList
-          }
-          UserModule.SET_USER_INFO(formatUserInfo)
+      // 防止页面刷新数据丢失
+      let userInfo = localStorage.getItem('userInfo')
+      if (userInfo) {
+        let formatUserInfo: LoginUserInfo = {
+          userType: JSON.parse(userInfo).userType,
+          userRoutes: JSON.parse(userInfo).dataList
         }
+        UserModule.SET_USER_INFO(formatUserInfo)
         const accessRoutes = formatAsyncRoutes(
           <ApiRoute[]>UserModule.userInfo.userRoutes,
           asyncRoutes
@@ -47,7 +45,7 @@ router.beforeEach(async (to: Route, from: Route, next: any) => {
         accessRoutes.push({ path: '*', redirect: '/404', hidden: true })
         router.addRoutes(accessRoutes)
         next({ ...to, replace: true })
-      } catch {
+      } else {
         next('/login')
       }
     }

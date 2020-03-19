@@ -3,6 +3,7 @@ import { Route } from 'vue-router'
 import { UserModule } from '@/store/modules/userInfo'
 import { asyncRoutes } from '@/router'
 
+// 动态路由匹配（根据业务逻辑而定）
 const formatAsyncRoutes = (
   apiRoutes: ApiRoute[],
   asyncRoutes: LocalRoute[]
@@ -22,6 +23,15 @@ const formatAsyncRoutes = (
   return res
 }
 
+const setAsyncRoutes = (apiRoutes: ApiRoute[], asyncRoutes: LocalRoute[]) => {
+  const accessRoutes = formatAsyncRoutes(apiRoutes, asyncRoutes)
+  accessRoutes.push({ path: '*', redirect: '/404', hidden: true })
+  router.addRoutes(accessRoutes)
+}
+
+// 在路由上挂载添加动态路由的方法
+router.setAsyncRoutes = setAsyncRoutes
+
 router.beforeEach(async (to: Route, from: Route, next: any) => {
   if (to.path === '/login') {
     next()
@@ -38,12 +48,7 @@ router.beforeEach(async (to: Route, from: Route, next: any) => {
           userRoutes: JSON.parse(userInfo).dataList
         }
         UserModule.SET_USER_INFO(formatUserInfo)
-        const accessRoutes = formatAsyncRoutes(
-          <ApiRoute[]>UserModule.userInfo.userRoutes,
-          asyncRoutes
-        )
-        accessRoutes.push({ path: '*', redirect: '/404', hidden: true })
-        router.addRoutes(accessRoutes)
+        setAsyncRoutes(<ApiRoute[]>UserModule.userInfo.userRoutes, asyncRoutes)
         next({ ...to, replace: true })
       } else {
         next('/login')

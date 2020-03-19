@@ -6,7 +6,8 @@ import {
   Action
 } from 'vuex-module-decorators'
 import store from '@/store'
-import router, { resetRouter, constantRoutes } from '@/router'
+import router, { resetRouter, constantRoutes, asyncRoutes } from '@/router'
+
 import { getPageRouter } from '@/api/page-router/page-router.ts'
 
 @Module({ dynamic: true, store, name: 'UserModule' })
@@ -41,6 +42,7 @@ class UserInfo extends VuexModule {
           userType: res.data.userType,
           userRoutes: res.data.dataList
         })
+        router.setAsyncRoutes(<ApiRoute[]>this.userInfo.userRoutes, asyncRoutes)
         resolve()
       })
     })

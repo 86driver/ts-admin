@@ -10,7 +10,7 @@ import { Component, Vue } from 'vue-property-decorator'
 @Component({})
 export default class App extends Vue {
   jump() {
-    this.$router.push('/home')
+    this.$router.push('/permission/role')
   }
 }
 </script>

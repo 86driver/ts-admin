@@ -69,8 +69,7 @@ interface IResTemp {
 
 module.exports = {
   getPageRouter: (data: any) => {
-    console.log(data.query)
-    let resTemp: IResTemp = {
+    const resTemp: IResTemp = {
       status: {
         code: 0,
         message: 'success',

@@ -8,11 +8,11 @@ const formatAsyncRoutes = (
   apiRoutes: ApiRoute[],
   asyncRoutes: LocalRoute[]
 ) => {
-  let res: LocalRoute[] = []
+  const res: LocalRoute[] = []
   apiRoutes.map(item1 => {
     asyncRoutes.map(item2 => {
       if (item1.path === item2.path) {
-        let temp = item2
+        const temp = item2
         if (item1.children && item2.children) {
           temp.children = formatAsyncRoutes(item1.children, item2.children)
         }
@@ -43,9 +43,9 @@ router.beforeEach(async (to: Route, from: Route, next: any) => {
       next()
     } else {
       // 防止页面刷新数据丢失
-      let userInfo = localStorage.getItem('userInfo')
+      const userInfo = localStorage.getItem('userInfo')
       if (userInfo) {
-        let formatUserInfo: LoginUserInfo = {
+        const formatUserInfo: LoginUserInfo = {
           userType: JSON.parse(userInfo).userType,
           userRoutes: JSON.parse(userInfo).dataList
         }

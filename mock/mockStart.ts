@@ -1,4 +1,4 @@
-let nodemon = require('nodemon') //引入nodemon模块
+const nodemon = require('nodemon') //引入nodemon模块
 
 /**
  * script 重启的脚本
@@ -10,13 +10,13 @@ nodemon({
 })
 
 nodemon
-  .on('start', function() {
+  .on('start', function () {
     console.log('mockServer has started')
   })
-  .on('quit', function() {
+  .on('quit', function () {
     console.log('mockServer has quit')
     process.exit()
   })
-  .on('restart', function(files) {
+  .on('restart', function (files: File) {
     console.log('mockServer restarted due to: ', files)
   })

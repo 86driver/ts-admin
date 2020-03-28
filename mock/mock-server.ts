@@ -2,13 +2,13 @@ import express from 'express'
 import Mock from 'mockjs'
 import bodyParser from 'body-parser'
 
-let app = express()
+const app = express()
 app.use(bodyParser.json())
 
-let pageRouter = require('./page-router')
+const pageRouter = require('./page-router')
 
 // 设置跨域
-app.all('*', function(req, res, next) {
+app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
   // 此处根据前端请求携带的请求头进行配置

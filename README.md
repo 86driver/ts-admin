@@ -1,2 +1,2 @@
-# ts-test
-vue+typescript练手
+# ts-admin 
+vue动态生成路由表
